@@ -1,5 +1,7 @@
 # worktree-manager
 
+![npm](https://img.shields.io/npm/v/worktree-manager) ![npm bundle size](https://img.shields.io/bundlephobia/min/worktree-manager) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/alexweininger/worktree-manager/CI)
+
 > Manage git worktrees for multiple repositories easily.
 
 ## Install
