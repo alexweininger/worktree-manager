@@ -1,4 +1,6 @@
+import { WorktreeClient } from "git-worktree";
 import path from "path";
+import simpleGit from "simple-git";
 import { Repo } from "./Repo";
 export interface IWorktree {
 	readonly path: string;
@@ -19,5 +21,11 @@ export class Worktree implements IWorktree {
 			return undefined;
 		}
 		return typeOrRepoName;
+	}
+
+	public async branch(): Promise<string> {
+		const git = simpleGit(this.path, { binary: 'git' });
+		const branch = await git.branch();
+		return branch.current;
 	}
 }
