@@ -7,7 +7,7 @@ export function getConfigPath(dir: string = getHomePath()): string {
 	return path.join(dir, configFileName);
 }
 
-export function findConfigPath(localDir: string): string | undefined {
+export function findConfigPath(localDir: string): string {
 	const localConfigPath = getConfigPath(localDir);
 	const userConfigPath = getConfigPath();
 	return fs.existsSync(localConfigPath) ? localConfigPath : userConfigPath;

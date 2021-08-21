@@ -1,8 +1,3 @@
-import { WorktreeManager } from './WorktreeManager';
-
-async function main() {
-	const wtm = new WorktreeManager(process.cwd());
-	wtm.init();
-}
-
-main();
+export { WorktreeManager } from './WorktreeManager';
+export { Repo } from './Repo';
+export { Worktree } from './Worktree';

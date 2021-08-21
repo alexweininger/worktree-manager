@@ -18,9 +18,10 @@ export async function createConfig(
 		repos: [],
 	};
 
+	console.log('here');
 	await jsonfile.writeFile(filePath, worktreesConfig, {
 		spaces: 4,
+		flag: 'w'
 	});
-
 	return filePath;
 }

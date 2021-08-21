@@ -1,7 +1,14 @@
 import jsonfile from 'jsonfile';
-import { getConfigPath } from '../utils/configUtils';
 import { IConfig } from './IConfig';
 
-export async function readConfig(dir?: string): Promise<IConfig> {
-	return await jsonfile.readFile(getConfigPath(dir));
+export async function readConfig(configFile: string): Promise<IConfig> {
+	try {
+
+		return await jsonfile.readFile(configFile);
+	} catch (e) {
+		console.error('Could not read config file', e);
+		return {
+			repos: []
+		}
+	}
 }
