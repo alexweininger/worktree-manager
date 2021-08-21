@@ -8,15 +8,12 @@ import { findConfigPath } from './utils/configUtils';
 import simpleGit, { SimpleGit } from 'simple-git';
 import { Repo } from './Repo';
 
-interface IRepo extends IRepoConfig {
-}
+interface IRepo extends IRepoConfig {}
 
 export class WorktreeManager {
-
 	private repos: IRepoConfig[] = [];
 
 	private readonly configPath: string;
-
 
 	constructor(public readonly cwd: string) {
 		let configPath = findConfigPath(cwd);
@@ -49,7 +46,6 @@ export class WorktreeManager {
 	 * Worktree: add, remove list, open, move
 	 */
 	public async addRepo(repo: IRepoConfig): Promise<void> {
-
 		if (!repo.url) {
 			repo.url = await this.getRepoRemoteUrl(repo.path);
 		}
@@ -64,16 +60,16 @@ export class WorktreeManager {
 	 * Worktree: add, remove list, open, move
 	 */
 	public async removeRepo(path: string): Promise<void> {
-		this.repos = this.repos.filter((repo) => repo.path !== path);
+		this.repos = this.repos.filter(repo => repo.path !== path);
 		await this.saveConfig();
 	}
 
 	public listRepos(): Repo[] {
-		return this.repos.map((repo) => new Repo(repo));
+		return this.repos.map(repo => new Repo(repo));
 	}
 
 	public getRepo(path: string): IRepo | undefined {
-		return this.repos.find((repo) => repo.path === path);
+		return this.repos.find(repo => repo.path === path);
 	}
 
 	public async getRepoRemoteUrl(path: string): Promise<string | undefined> {
@@ -81,7 +77,7 @@ export class WorktreeManager {
 		const remoteNames = await git.getRemotes();
 		if (remoteNames.length > 0) {
 			const remoteName = remoteNames[0].name;
-			const remoteUrl = (await git.remote(['get-url', remoteName]));
+			const remoteUrl = await git.remote(['get-url', remoteName]);
 			if (remoteUrl) {
 				return remoteUrl.trim();
 			}

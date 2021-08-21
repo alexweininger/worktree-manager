@@ -1,7 +1,7 @@
-import { WorktreeClient } from "git-worktree";
-import path from "path";
-import simpleGit from "simple-git";
-import { Repo } from "./Repo";
+import { WorktreeClient } from 'git-worktree';
+import path from 'path';
+import simpleGit from 'simple-git';
+import { Repo } from './Repo';
 export interface IWorktree {
 	readonly path: string;
 	readonly name: string;
@@ -9,7 +9,7 @@ export interface IWorktree {
 }
 
 export class Worktree implements IWorktree {
-	constructor(public readonly repo: Repo, public path: string) { }
+	constructor(public readonly repo: Repo, public path: string) {}
 
 	public get name(): string {
 		return path.basename(this.path);

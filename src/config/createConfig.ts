@@ -21,7 +21,7 @@ export async function createConfig(
 	console.log('here');
 	await jsonfile.writeFile(filePath, worktreesConfig, {
 		spaces: 4,
-		flag: 'w'
+		flag: 'w',
 	});
 	return filePath;
 }

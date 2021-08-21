@@ -1,10 +1,9 @@
-import path from "path";
-import { IRepoConfig } from "./config/IRepoConfig";
+import path from 'path';
+import { IRepoConfig } from './config/IRepoConfig';
 import { WorktreeClient } from 'git-worktree';
-import { IWorktree, Worktree } from "./Worktree";
+import { IWorktree, Worktree } from './Worktree';
 
 export class Repo implements IRepoConfig {
-
 	private worktreeClient: WorktreeClient;
 	public path: string;
 	public alias?: string;
@@ -23,7 +22,8 @@ export class Repo implements IRepoConfig {
 
 	public async getWorktrees(): Promise<Worktree[]> {
 		const worktreePaths = await this.worktreeClient.list();
-		const worktrees: Worktree[] = worktreePaths?.map((path: string) => new Worktree(this, path)) ?? [];
+		const worktrees: Worktree[] =
+			worktreePaths?.map((path: string) => new Worktree(this, path)) ?? [];
 		return worktrees;
 	}
 }
