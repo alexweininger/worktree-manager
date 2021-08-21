@@ -1,7 +1,7 @@
 import path from 'path';
 import { IRepoConfig } from './config/IRepoConfig';
 import { WorktreeClient } from 'git-worktree';
-import { IWorktree, Worktree } from './Worktree';
+import { Worktree } from './Worktree';
 
 export class Repo implements IRepoConfig {
 	private worktreeClient: WorktreeClient;
