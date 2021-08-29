@@ -8,9 +8,16 @@ import { findConfigPath } from './utils/configUtils';
 import simpleGit, { SimpleGit } from 'simple-git';
 import { Repo } from './Repo';
 
-interface IRepo extends IRepoConfig {}
+interface IRepo extends IRepoConfig { }
 
 export class WorktreeManager {
+
+	public static async create(cwd: string) {
+		const wtm = new WorktreeManager(cwd);
+		await wtm.loadConfig();
+		return wtm;
+	}
+
 	private repos: IRepoConfig[] = [];
 
 	private readonly configPath: string;
@@ -50,6 +57,10 @@ export class WorktreeManager {
 			repo.url = await this.getRepoRemoteUrl(repo.path);
 		}
 
+		if (this.repos.find(r => r.path === repo.path)) {
+			throw new Error('Repo already added');
+		}
+
 		this.repos.push(repo);
 		console.log(this.repos);
 		await this.saveConfig();
@@ -65,7 +76,7 @@ export class WorktreeManager {
 	}
 
 	public listRepos(): Repo[] {
-		return this.repos.map(repo => new Repo(repo));
+		return this.repos.map(repo => new Repo(repo, this));
 	}
 
 	public getRepo(path: string): IRepo | undefined {

@@ -1,6 +1,6 @@
 import { WorktreeManager } from './WorktreeManager';
 
-async function main() {
+export async function main() {
 	const wtm = new WorktreeManager(process.cwd());
 	const config = await wtm.loadConfig();
 	console.log(config);
@@ -13,6 +13,8 @@ async function main() {
 	const wts = await repos[0].getWorktrees();
 	console.log(wts);
 	console.log(wts[0].type, wts[0].name);
+
+	await repos[0].addWorktree('worktree35', 'alex/newWorktree35', 'feature');
 }
 
 main();
